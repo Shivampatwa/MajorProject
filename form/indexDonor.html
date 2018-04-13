@@ -12,13 +12,17 @@
 <!-- Custom Theme files -->
 <link rel="stylesheet" type="text/css" href="../form/css/bootstrap.css">
 <link href="../form/css/style.css" rel='stylesheet' type='text/css' />
-<script src="../form/js/jquery.js" charset="utf-8"></script>
-<script src="../form/js/bootstrap.js" type="text/javascript"></script>
-<script src="../form/js/angular.min.js" type="text/javascript"></script>
+
 
 <!--fonts--> 
 <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
+<script src="js/jquery.js" charset="utf-8"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/angular.min.js" type="text/javascript"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.js" type="text/javascript"></script>
+
 <!--//fonts--> 
 </head>
 <body ng-app="myModule">
@@ -32,12 +36,12 @@
 <div class="row">
   <div class="col-md-6">
           <label for="">First name:</label><br>
-          <input ng-model="person.Fname" class="form-control" type="text" name="firstname" value="" placeholder="First Name" required>
+          <input ng-model="person.Firstname" class="form-control" type="text" name="firstname" value="" placeholder="First Name" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Last name:</label><br>
-          <input ng-model="person.Lname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name" required>
+          <input ng-model="person.Lastname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name" required>
     </div>
 </div>
 
@@ -117,7 +121,7 @@
 
 
           <label for="">Permanent Address:</label><br>
-          <input ng-model="person.Paddress" class="form-control" type="address" name="PermanentAddress" value="" placeholder="Permanent Address" required>
+          <input ng-model="person.Permanentaddress" class="form-control" type="address" name="PermanentAddress" value="" placeholder="Permanent Address" required>
 
 <div class="row">
   <div class="col-md-6">
@@ -127,7 +131,7 @@
      <div class="col-md-6">
           <label for="">Blood Group:</label><br>
       <!--  <input ng-model="person.Bgroup" class="form-control" type="text" name="Blood Group" value="" placeholder="Blood Group"> -->
-        <select class="widthh dropheight" ng-model="person.Bgroupp"  placeholder="Blood Group" required>
+        <select class="widthh dropheight" ng-model="person.Bloodgroupp"  placeholder="Blood Group" required>
           <option value="A+">A+ ( A Positive )</option>
           <option value="A-">A- ( A Negative )</option>
           <option value="B+">B+ ( B Positive )</option>
@@ -143,12 +147,12 @@
 <div class="row">
   <div class="col-md-6">
           <label for="">Phone Number:</label><br>
-          <input ng-model="person.pnumber" class="form-control" type="text" name="Phone_No." value="" placeholder="Phone Number" required>
+          <input ng-model="person.personalnumber" class="form-control" type="text" name="Phone_No." value="" placeholder="Phone Number" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Alternative Number:</label><br>
-          <input ng-model="person.anumber" class="form-control" type="text" name="Alternative_No." value="" placeholder="Alternative Number" required>
+          <input ng-model="person.alternumber" class="form-control" type="text" name="Alternative_No." value="" placeholder="Alternative Number" required>
   </div>
 </div>
 
@@ -158,12 +162,12 @@
 <div class="row">
   <div class="col-md-6">
           <label for="">Create Password:</label><br>
-          <input ng-model="person.password1" class="form-control" type="password" name="password1" value="" placeholder="Password" required>
+          <input ng-model="person.password" class="form-control" type="password" name="password1" value="" placeholder="Password" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Verify Password:</label><br>
-          <input ng-model="person.password2" class="form-control" type="password" name="password2" value="" placeholder="Verify Password" required>
+          <input ng-model="person.password12" class="form-control" type="password" name="password2" value="" placeholder="Verify Password" required>
     </div>
 </div>
 
@@ -176,7 +180,7 @@
 --><br>
 
            <div class="clear"></div>
-        <input type="submit" value="Submit">
+        <button type="button" name="Submit" value="Submit" ng-click="Store()">Submit</button>
         </div>
 
       </form>
@@ -184,26 +188,72 @@
    </div>
    
 		
-		<script type="text/javascript" src="../form/js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../form/js/jquery-2.1.4.min.js"></script>
 		<!-- Calendar -->
-				<link rel="stylesheet" href="css/jquery-ui.css" />
-				<script src="js/jquery-ui.js"></script>
-				  <script>
-						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-						  });
-				  </script>
+<link rel="stylesheet" href="css/jquery-ui.css" />
+<script src="js/jquery-ui.js"></script>
+<script>
+ $(function() {
+	$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+ });
+</script>
+
+
 
 <script type="text/javascript">
+var app= angular.module("myModule",["firebase"]);
+var config = {
+    apiKey: "AIzaSyDTJt6I_APWd3LADE1kB4N_yGV5bcNpsIU",
+    authDomain: "dlab-webbhumi.firebaseapp.com",
+    databaseURL: "https://dlab-webbhumi.firebaseio.com",
+    projectId: "dlab-webbhumi",
+    storageBucket: "dlab-webbhumi.appspot.com",
+    messagingSenderId: "917335204678"
+  };
+  // firebase.initializeApp(config);
+
+app.controller("myContoller", ["$scope", "$firebaseObject","$firebaseArray",function($scope, $firebaseObject,$firebaseArray) {
+var fb = firebase.initializeApp(config);
+var ref = fb.database().ref();
+$scope.profile = $firebaseObject(ref.child("person"));
+$scope.Store = function(){
+var ff= $firebaseArray(ref);
+// // ---------------------------------------------------------------------------------------------
+firebase.auth()
+.createUserWithEmailAndPassword($scope.person.email, $scope.person.password)
+.then(function(data){
+console.log(data);
+})
+.catch(function(error){
+console.log("Error creating user:", error);
+});
+// -----------------------------------------------------------------------------------------
+ff.$add($scope.person).then(function(ref) {
+var id = ref.key;
+console.log("added record with id " + id);
+ff.$indexFor(id);},
+function(ref){
+console.log("ref");});
+}
+// $scope.check = function(){
+// var ref = fb.database().ref(); // var usersRef = firebase.database().ref("person");
+// ref.orderByChild($scope.bye).equalTo($scope.hello).on("value", function(snapshot) {
+// console.log(snapshot.val());
+// snapshot.forEach(function(data) {
+// /*console.log(data);*/});
+// });
+// }
+}
+]);
+</script>
+</body>
+<!-- <script type="text/javascript">
 var app= angular.module("myModule",[]);
 
 app.controller("myContoller",function ($scope) {
   $scope.showdata=function () {
     console.log($scope.person);
   }
-});
-</script>
-			<!-- //Calendar -->
-
-</body>
+})
+</script>-->
 </html>

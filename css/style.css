@@ -3052,3 +3052,76 @@ h5.title-w3 {
     margin: 9em 0 0px 0;
 }
 /*-- /responsive design --*/
+
+
+
+
+
+
+/*aruna mam*/
+
+
+.aboutBan
+{
+  background:url(../images/GiveBlood-small.jpg)no-repeat center 0px;
+  background-size: cover;
+  height: 500px!important;
+}
+
+.banner-dott1 {
+    background: url(../images/dott.png)repeat 0px 0px;
+    background-size: 2px;
+    -webkit-background-size: 2px;
+    -moz-background-size: 2px;
+    -o-background-size: 2px;
+    -ms-background-size: 2px;
+  height: 500px!important;
+}
+
+.serviceBan
+{
+  background:url(../images/whoareare.jpg)no-repeat center 0px;
+  background-size: cover;
+  height: 500px!important;
+}
+
+.w3l_services_footer_top_right_main_r {
+    float: left;
+    width: 60%;
+}
+
+.dashBan
+{
+  
+  background:url(../images/566507.jpg)no-repeat center 0px;
+  background-size: cover;
+  height: 500px!important;
+}
+
+
+
+
+.s1
+{
+  padding:5%;
+  background-color:rgba(138,6,16,0.6);
+}
+
+
+
+.parallax {
+    /* The image used */
+    background-image: url("img_parallax.jpg");
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/*shivam dashboard*/
+

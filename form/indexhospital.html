@@ -15,9 +15,12 @@
 <!--fonts--> 
 <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
-  <script src="../form/js/jquery.js" charset="utf-8"></script>
-  <script src="../form/js/bootstrap.js" type="text/javascript"></script>
-  <script src="../form/js/angular.min.js" type="text/javascript"></script>
+  <script src="js/jquery.js" charset="utf-8"></script>
+  <script src="js/bootstrap.js" type="text/javascript"></script>
+  <script src="js/angular.min.js" type="text/javascript"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.js" type="text/javascript"></script>
+
 <!--//fonts--> 
 </head>
 <body ng-app="myModule">
@@ -29,22 +32,22 @@
 			<form ng-controller="myContoller" class="main row color" action="" method="get" class="">
         <div class="form-group">
           <label for="">Hospital/Blood Bank name:</label><br>
-          <input ng-model="hospital.Fname" class="form-control" type="text" name="hospitalname" value="" placeholder="Hospital Name" required>
+          <input ng-model="hospital.name" class="form-control" type="text" name="hospitalname" value="" placeholder="Hospital Name" required>
 <div class="row">
 	<div class="col-md-6">
           <label for="">Manager first name:</label><br>
-          <input ng-model="manager.Fname" class="form-control" type="text" name="managerfirstname" value="" placeholder="First Name" required>
+          <input ng-model="hospital.Firstname" class="form-control" type="text" name="managerfirstname" value="" placeholder="First Name" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Manager last name:</label><br>
-          <input ng-model="manager.Lname" class="form-control" type="text" name="managerlastname" value="" placeholder="Last Name" required>
+          <input ng-model="hospital.Lastname" class="form-control" type="text" name="managerlastname" value="" placeholder="Last Name" required>
     </div>
 </div>
 
 
           <label for="">E-mail:</label><br>
-          <input ng-model="person.email" class="form-control" type="email" name="E-mail" value="" placeholder="E-mail" placeholder="E=mail" required>
+          <input ng-model="hospital.email" class="form-control" type="email" name="E-mail" value="" placeholder="E-mail" placeholder="E=mail" required>
 
 
 
@@ -52,7 +55,7 @@
 	  <div class="col-md-6">
           <label for="">State:</label><br>
       <!--  <input ng-model="person.Bgroup" class="form-control" type="text" name="Blood Group" value="" placeholder="Blood Group"> -->
-        <select class="widthh dropheight" name="state" ng-model="person.State"  placeholder="State" required>
+        <select class="widthh dropheight" name="state" ng-model="hospital.State"  placeholder="State" required>
            <option value="Arunachal Pradesh">Arunachal Pradesh</option>
             <option value="Assam">Assam</option>
             <option value="Bihar">Bihar</option>
@@ -93,21 +96,21 @@
     </div>
     <div class="col-md-6">
           <label for="">City:</label><br>
-          <input ng-model="person.City" class="form-control" type="text" name="City" value="" placeholder="City" required>
+          <input ng-model="hospital.City" class="form-control" type="text" name="City" value="" placeholder="City" required>
     </div>
 </div>
 
           <label for="">Landmark:</label><br>
-          <input ng-model="person.Landmark" class="form-control" type="text" name="Landmark" value="" placeholder="Landmark">
+          <input ng-model="hospital.Landmark" class="form-control" type="text" name="Landmark" value="" placeholder="Landmark">
 
 
           <label for="">Address:</label><br>
-          <input ng-model="person.Paddress" class="form-control" type="text" name="PermanentAddress" value="" placeholder="Permanent Address" required>
+          <input ng-model="hospital.Permanentaddress" class="form-control" type="text" name="PermanentAddress" value="" placeholder="Permanent Address" required>
 
 <div class="row">
 	<div class="col-md-6">
           <label for="">Pincode:</label><br>
-          <input ng-model="person.Pincode" class="form-control" type="text" name="Pincode" value="" placeholder="Pincode" required>
+          <input ng-model="hospital.Pincode" class="form-control" type="text" name="Pincode" value="" placeholder="Pincode" required>
      </div>
 
 </div>
@@ -115,27 +118,27 @@
 <div class="row">
 	<div class="col-md-6">
           <label for="">Contact Number:</label><br>
-          <input ng-model="person.pnumber" class="form-control" type="text" name="Phone_No." value="" placeholder="Phone Number" required>
+          <input ng-model="hospital.personalnumber" class="form-control" type="text" name="Phone_No." value="" placeholder="Phone Number" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Alternative Contact:</label><br>
-          <input ng-model="person.anumber" class="form-control" type="text" name="Alternative_No." value="" placeholder="Alternative Number" required>
+          <input ng-model="hospital.alternumber" class="form-control" type="text" name="Alternative_No." value="" placeholder="Alternative Number" required>
 	</div>
 </div>
 
           <label for="">Create Hospital Id:</label><br>
-          <input ng-model="person.id" class="form-control" type="text" name="id" value="" placeholder="User id" required>
+          <input ng-model="hospital.id" class="form-control" type="text" name="id" value="" placeholder="User id" required>
 
 <div class="row">
 	<div class="col-md-6">
           <label for="">Create Password:</label><br>
-          <input ng-model="person.password1" class="form-control" type="password" name="password1" value="" placeholder="Password" required>
+          <input ng-model="hospital.password" class="form-control" type="password" name="password1" value="" placeholder="Password" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Verify Password:</label><br>
-          <input ng-model="person.password2" class="form-control" type="password" name="password2" value="" placeholder="Verify Password" required>
+          <input ng-model="hospital.password12" class="form-control" type="password" name="password2" value="" placeholder="Verify Password" required>
     </div>
 </div>
 
@@ -148,15 +151,15 @@
 --><br>
 
         <div class="clear"></div>
-				<input ng-click="showdata()" type="submit" value="Submit">
-
+				<!-- <input ng-click="showdata()" type="submit" value="Submit"> -->
+				<button type="button"  ng-click="Store()">Submit</button>
         </div>
 
       </form>
 		</div>
    </div>
    
-		<script type="text/javascript" src="../form/js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 		<!-- Calendar -->
 				<link rel="stylesheet" href="css/jquery-ui.css" />
 				<script src="js/jquery-ui.js"></script>
@@ -167,14 +170,57 @@
 				  </script>
 			<!-- //Calendar -->
 <script type="text/javascript">
-var app= angular.module("myModule",[]);
+var app= angular.module("myModule",["firebase"]);
+var config = {
+    apiKey: "AIzaSyDTJt6I_APWd3LADE1kB4N_yGV5bcNpsIU",
+    authDomain: "dlab-webbhumi.firebaseapp.com",
+    databaseURL: "https://dlab-webbhumi.firebaseio.com",
+    projectId: "dlab-webbhumi",
+    storageBucket: "dlab-webbhumi.appspot.com",
+    messagingSenderId: "917335204678"
+  };
+  // firebase.initializeApp(config);
 
-app.controller("myContoller",function ($scope) {
-  $scope.showdata=function () {
-    console.log($scope.person);
-  }
+	app.controller("myContoller", ["$scope", "$firebaseObject","$firebaseArray",function($scope, $firebaseObject,$firebaseArray) {
+var fb = firebase.initializeApp(config);
+var ref = fb.database().ref();
+$scope.profile = $firebaseObject(ref.child("Hospital"));
+$scope.Store = function(){
+var ff= $firebaseArray(ref);
+// // ---------------------------------------------------------------------------------------------
+firebase.auth()
+.createUserWithEmailAndPassword($scope.hospital.email, $scope.hospital.password)
+.then(function(data){
+console.log(data);
+})
+.catch(function(error){
+console.log("Error creating user:", error);
 });
+// -----------------------------------------------------------------------------------------
+ff.$add($scope.hospital).then(function(ref) {
+var id = ref.key;
+console.log("added record with id " + id);
+ff.$indexFor(id);},
+function(ref){
+console.log("ref");});
+}
+// $scope.check = function(){
+// var ref = fb.database().ref(); // var usersRef = firebase.database().ref("Hospital");
+// ref.orderByChild($scope.bye).equalTo($scope.hello).on("value", function(snapshot) {
+// console.log(snapshot.val());
+// snapshot.forEach(function(data) {
+// /*console.log(data);*/});
+// });
+// }
+}
+]);
 </script>
+
+
+<script></script>
 
 </body>
 </html>
+
+
+

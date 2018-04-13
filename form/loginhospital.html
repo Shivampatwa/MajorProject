@@ -12,9 +12,11 @@
 <!-- Custom Theme files -->
 <link rel="stylesheet" type="text/css" href="../form/css/bootstrap.css">
 <link href="../form/css/style.css" rel='stylesheet' type='text/css' />
-<script src="../form/js/jquery.js" charset="utf-8"></script>
-<script src="../form/js/bootstrap.js" type="text/javascript"></script>
-<script src="../form/js/angular.min.js" type="text/javascript"></script>
+<script src="js/jquery.js" charset="utf-8"></script>
+<script src="js/bootstrap.js" type="text/javascript"></script>
+<script src="js/angular.min.js" type="text/javascript"></script>
+<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angularFire/2.3.0/angularfire.js" type="text/javascript"></script>
 <!--fonts--> 
 <link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Droid+Sans:400,700" rel="stylesheet">
@@ -25,53 +27,73 @@
 <!--background-->
 <h1> Hospital Login Form </h1>
     <div class="bg-agile">
-	<div class="book-appointment">
-	<h2>Hospital Login</h2>
-			<form ng-controller="myContoller" class="main row color" action="" method="get" class="">
+  <div class="book-appointment">
+  <h2>Hospital Login</h2>
+      <form ng-controller="myContoller" class="main row color" action="" method="get" class="">
         <div class="form-group">
 <div class="row">
-	<div class="col-md-6">
-          <label for="">Username</label><br>
-          <input ng-model="Username" class="form-control" type="text" name="Username" value="" placeholder="Username" required>
+  <div class="col-md-6">
+          <label for="">Enter E-mail</label><br>
+          <input ng-model="Hospital.name" class="form-control" type="text" name="Username" value="" placeholder="Enter E-mail" required>
     </div>
     <div class="col-md-6">
 
           <label for="">Password:</label><br>
-          <input ng-model="Password" class="form-control" type="password" name="password" value="" placeholder="Password" required>
+          <input ng-model="Hospital.password" class="form-control" type="password" name="password" value="" placeholder="Password" required>
     </div>
 </div>
 
 <br>
 
-        	<div class="clear"></div>
-				<input  type="submit" value="Login">
+          <div class="clear"></div>
+        <button type="button"  ng-click="Store()">Login</button>
 
         </div>
 
       </form>
-		</div>
+    </div>
    </div>
    
-		<script type="text/javascript" src="../form/js/jquery-2.1.4.min.js"></script>
-		<!-- Calendar -->
-				<link rel="stylesheet" href="css/jquery-ui.css" />
-				<script src="js/jquery-ui.js"></script>
-				  <script>
-						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-						  });
-				  </script>
-			<!-- //Calendar -->
 
-<script type="text/javascript">
-var app= angular.module("myModule",[]);
+    <!-- Calendar -->
+        <link rel="stylesheet" href="css/jquery-ui.css" />
+        <script src="js/jquery-ui.js"></script>
+          <script>
+              $(function() {
+              $( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+              });
 
-app.controller("myContoller",function ($scope) {
-  $scope.showdata=function () {
-    console.log($scope.person);
-  }
+var app= angular.module("myModule",["firebase"]);
+var config = {
+    apiKey: "AIzaSyDTJt6I_APWd3LADE1kB4N_yGV5bcNpsIU",
+    authDomain: "dlab-webbhumi.firebaseapp.com",
+    databaseURL: "https://dlab-webbhumi.firebaseio.com",
+    projectId: "dlab-webbhumi",
+    storageBucket: "dlab-webbhumi.appspot.com",
+    messagingSenderId: "917335204678"
+  };
+  // firebase.initializeApp(config);
+  app.controller("myContoller",["$scope","$window","$firebaseObject","$firebaseArray",function($scope,$window,$firebaseObject,$firebaseArray){
+    var fb = firebase.initializeApp(config);
+var ref = fb.database().ref();
+$scope.profile = $firebaseObject(ref.child("Hospital"));
+$scope.Store=function(){
+
+
+firebase.auth().signInWithEmailAndPassword($scope.Hospital.name, $scope.Hospital.password).then(function(){
+  $window.location.href="https://www.google.com";
+  console.log("login");
+}).catch(function(error) {
+   console.log(error.code);
+   console.log(error.message);
 });
+}
+  }]);
+
+
 </script>
 
 </body>
 </html>
+
+
