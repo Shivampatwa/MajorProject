@@ -115,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 
 <!-- about -->
-	<div ng-controller="ProfileCtrl as data1" class="container infoBan w3-heading-all" style="">
+	<div ng-controller="ProfileCtrl" class="container infoBan w3-heading-all" style="">
 		<div class="row">
 			<div class=" col-sm-12 " > <!-- carousel-caption -->
 				<h3 >Donor Information</h3>
@@ -158,6 +158,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<button type="submit" class="btn btn-primary btn-block" ng-click="check()" style="background-color: #9e0033">Search</button>
 								</div>
 							</div>
+							<div  class="row form-group"> 
+								<div class=" col-sm-12">
+									<button type="submit" class="btn btn-primary btn-block" ng-click="" style="background-color: ##337ab7">Send Request</button>
+								</div>
+							</div>
+
 						</form>
 					</div>
 				</div>
@@ -172,9 +178,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat ="data2 in data1.data">
-						<td>{{data2.val().Firstname}}</td>
-						<td>{{data2.val().Bloodgroupp}}</td>
+					<tr ng-repeat ="feed in feeds">
+						<td>{{feed.val().Firstname}}</td>
+						<td>{{feed.val().Bloodgroupp}}</td>
 						<td><input class="checkbox-primary"  type="checkbox" name="checkbox" value="" ></td>
 								
 					</tr>
@@ -182,12 +188,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<tbody>
 			</table>
 				</div>
-											<div  class="form-group"> 
-								<div class=" col-sm-12">
-									<button type="submit" class="btn btn-primary btn-block" ng-click="" style="background-color: #9e0033">Send Notification</button>
-								</div>
-							</div>
-			</div>
+
+			</div>			
 		</div>
 		
 	</div>
@@ -329,7 +331,7 @@ var app = angular.module("sampleApp", ["firebase"]);
       var ref = fb.database().ref();
       $scope.profile = $firebaseObject(ref.child("Hospital"));
    
-   
+
           
   
       
@@ -342,8 +344,10 @@ var app = angular.module("sampleApp", ["firebase"]);
        // console.log(data.val());
        
         data.forEach(function(data) {
-
-        console.log(data.val());}); 
+        	$scope.feeds= data;
+   
+        // console.log(data.val());
+    }); 
          });
       }
   }
