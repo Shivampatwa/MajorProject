@@ -81,7 +81,7 @@ $scope.Store=function(){
 
 
 firebase.auth().signInWithEmailAndPassword($scope.person.name, $scope.person.password).then(function(){
-  $window.location.href="https://www.google.com";
+  $window.location.href="../dashboard-donor.html";
   console.log("login");
 }).catch(function(error) {
    console.log(error.code);

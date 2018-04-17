@@ -179,8 +179,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</thead>
 				<tbody>
 					<tr ng-repeat ="feed in feeds">
-						<td>{{feed.val().Firstname}}</td>
-						<td>{{feed.val().Bloodgroupp}}</td>
+						<td>{{feed.Firstname}}</td>
+						<td>{{feed.Bloodgroupp}}</td>
 						<td><input class="checkbox-primary"  type="checkbox" name="checkbox" value="" ></td>
 								
 					</tr>
@@ -326,14 +326,14 @@ var app = angular.module("sampleApp", ["firebase"]);
     storageBucket: "dlab-webbhumi.appspot.com",
     messagingSenderId: "917335204678"
   };
-    app.controller("ProfileCtrl", ["$scope", "$firebaseObject","$firebaseArray",function($scope, $firebaseObject,$firebaseArray) {
+    app.controller("ProfileCtrl", ["$scope", "$firebaseObject","$firebaseArray","$rootScope",function($scope, $firebaseObject,$firebaseArray,$rootScope) {
       var fb = firebase.initializeApp(config);
       var ref = fb.database().ref();
       $scope.profile = $firebaseObject(ref.child("Hospital"));
    
 
           
-  
+  $scope.feeds;
       
       
       $scope.check = function(){
@@ -341,15 +341,18 @@ var app = angular.module("sampleApp", ["firebase"]);
         ref.orderByChild("Bloodgroupp").equalTo($scope.input).on("value", function(data) {
         
         	//var a= data.val();
-       // console.log(data.val());
-       
+      //  console.log(data.val());
+       $scope.feeds=[];
         data.forEach(function(data) {
-        	$scope.feeds= data;
-   
-        // console.log(data.val());
+        	$scope.feeds.push(data.val());
+
+        	console.log(data.val());
+   			$rootScope.$apply();
+        //console.log(data.val().Firstname);
     }); 
          });
       }
+      
   }
   ]);
 </script>

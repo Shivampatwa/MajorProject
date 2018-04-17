@@ -1,0 +1,119 @@
+.aboutBan
+{
+	background:url(../images/GiveBlood-small.jpg)no-repeat center 0px;
+	background-size: cover;
+	height: 500px!important;
+}
+
+.banner-dott1 {
+    background: url(../images/dott.png)repeat 0px 0px;
+    background-size: 2px;
+    -webkit-background-size: 2px;
+    -moz-background-size: 2px;
+    -o-background-size: 2px;
+    -ms-background-size: 2px;
+	height: 500px!important;
+}
+
+.serviceBan
+{
+	background:url(../images/whoareare.jpg)no-repeat center 0px;
+	background-size: cover;
+	height: 500px!important;
+}
+
+.w3l_services_footer_top_right_main_r {
+    float: left;
+    width: 60%;
+}
+
+.dashBan
+{
+	
+	background:url(../images/566507.jpg)no-repeat center 0px;
+	background-size: cover;
+	height: 500px!important;
+}
+
+
+
+
+.s1
+{
+	padding:5%;
+	background-color:rgba(138,6,16,0.6);
+}
+
+.gallBan
+{
+	
+	background:url(../images/blood-donation.jpg)no-repeat center 0px;
+	background-size: cover;
+	height: 500px!important;
+}
+
+.contactBan
+{
+	background:url(../images/blood-donation_medium.jpg)no-repeat center 0px;
+	background-size: cover;
+	height: 500px!important;
+}
+
+.hide-bullets {
+    list-style:none;
+    margin-left: -40px;
+    margin-top:20px;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+	
+.w3-agile-team-img1{
+	background:url(../images/t6.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	-ms-background-size:cover;
+	min-height:450px;
+}
+.w3-agile-team-img-1 {
+	background:url(../images/t11.jpg) no-repeat 0px 0px;
+	background-size:cover;
+}
+.w3-agile-team-img-2 {
+	background:url(../images/hospital3.jpg) no-repeat 0px 0px;
+	background-size:cover;
+}
+.w3-agile-team-img-3 {
+	background:url(../images/hospital4.jpg) no-repeat 0px 0px;
+	background-size:cover;
+}
+.w3-agile-team-img-4 {
+	background:url(../images/hospital6.jpg) no-repeat 0px 0px;
+	background-size:cover;
+	
+}
+.w3-agile-team-img-5 {
+	background:url(../images/hospital5.jpg) no-repeat 0px 0px;
+	background-size:cover;
+}
+
+.parallax {
+    /* The image used */
+    background-image: url("img_parallax.jpg");
+
+    /* Set a specific height */
+    min-height: 500px; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
