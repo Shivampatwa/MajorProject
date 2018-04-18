@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>$interval</title>
+	<script src="angular.min.js"></script>
+
+</head>
+<body>
+<button ng-click="callAtInterval()" >call</button>
+</body>
+
+<script>
+var myapp = angular.module("myapp", []);
+
+myapp.controller("MyController", function($scope, $interval){
+
+    $interval(callAtInterval, 5000);
+
+});
+
+function callAtInterval() {
+    console.log("Interval occurred");
+}
+	</script>
+</html>
