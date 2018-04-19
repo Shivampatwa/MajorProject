@@ -173,15 +173,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<tr>
 						<th >Donor Name</th>
 						<th >Blood Group</th>
+						<th >Contact</th>
 						<th >Select</th>
 
 					</tr>
 				</thead>
 				<tbody>
+					{{alldata}}
 					<tr ng-repeat ="feed in feeds">
 						<td>{{feed.Firstname}}</td>
 						<td>{{feed.Bloodgroupp}}</td>
+						<td>{{feed.personalnumber}}</td>
 						<td><input class="checkbox-primary"  type="checkbox" name="checkbox" value="" ></td>
+
 								
 					</tr>
 
@@ -330,12 +334,41 @@ var app = angular.module("sampleApp", ["firebase"]);
       var fb = firebase.initializeApp(config);
       var ref = fb.database().ref();
       $scope.profile = $firebaseObject(ref.child("Hospital"));
-   
 
-          
+ ////////////////////////////Shivam/////////////////////////////////
   $scope.feeds;
+(function () {
+	
+	
+	var ref = fb.database().ref();  // var usersRef = firebase.database().ref("Hospital");
+        ref.orderByChild("Bloodgroupp").on("value", function(data) {
+        
+        	//var a= data.val();
+      //  console.log(data.val());
       
-      
+       $scope.feeds=[];
+        data.forEach(function(data) {
+        	console.log(data.val().Bloodgroupp);
+        	if(data.val().Bloodgroupp==null){
+        		console.log("Blank");
+        	}
+        	else{
+        		$scope.feeds.push(data.val());
+
+        	//console.log(data.val());
+   			//$rootScope.$apply();
+        	}
+        	
+        //console.log(data.val().Firstname);
+    }); 
+         });
+}()); 
+
+
+
+
+///////////////////////////////////////////////////////////////////          
+  $scope.feeds; 
       $scope.check = function(){
         var ref = fb.database().ref();  // var usersRef = firebase.database().ref("Hospital");
         ref.orderByChild("Bloodgroupp").equalTo($scope.input).on("value", function(data) {
@@ -347,7 +380,7 @@ var app = angular.module("sampleApp", ["firebase"]);
         	$scope.feeds.push(data.val());
 
         	console.log(data.val());
-   			$rootScope.$apply();
+   			//$rootScope.$apply();
         //console.log(data.val().Firstname);
     }); 
          });

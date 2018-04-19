@@ -31,17 +31,21 @@
     <div class="bg-agile">
 	<div class="book-appointment">
 	<h2>Donor's Information</h2>
-			<form ng-controller="myContoller" class="main row color" action="" method="get" class="">
+			<form name="myForm" ng-controller="myContoller" class="main row color" action="" method="get" class="" ng-submit="onSubmit()">
         <div class="form-group">
 <div class="row">
   <div class="col-md-6">
           <label for="">First name:</label><br>
-          <input ng-model="person.Firstname" pattern="[A-Z a-z]{2,15}" class="form-control" type="text" name="firstname" value="" placeholder="First Name" required>
+          <input ng-model="person.Firstname" class="form-control" type="text" name="firstname" value="" placeholder="First Name"  ng-pattern="/^[a-z A-Z]{3,20}$/" required>
+           <span ng-show="myForm.firstname.$error.pattern"> Name must be between 3 to 20 Characters</span>
+          <span ng-show="myForm.firstname.$error.required"> This field can not be empty ! </span> 
     </div>
     <div class="col-md-6">
 
           <label for="">Last name:</label><br>
-          <input ng-model="person.Lastname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name" required>
+          <input ng-model="person.Lastname" class="form-control" type="text" name="lastname" value="" placeholder="Last Name" ng-pattern="/^[a-z A-Z]{3,20}$/" required>
+          <span ng-show="myForm.lastname.$error.pattern"> Name must be at least of three characters </span>
+          <span ng-show="myForm.lastname.$error.required"> This field can not be empty ! </span>
     </div>
 </div>
 
@@ -242,7 +246,23 @@ console.log("ref");});
 // snapshot.forEach(function(data) {
 // /*console.log(data);*/});
 // });
-// }
+
+// Shivam Kachu kerne wala hai  !!!
+
+firebase.auth().useDeviceLanguage();
+window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container', {
+  'size': 'normal',
+  'callback': function(response) {
+    // reCAPTCHA solved, allow signInWithPhoneNumber.
+    // ...
+  },
+  'expired-callback': function() {
+    // Response expired. Ask user to solve reCAPTCHA again.
+    // ...
+  }
+});
+// Shivam ne yha tk kachu kia  !!!
+
 }
 ]);
 </script>
